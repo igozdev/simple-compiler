@@ -5,10 +5,12 @@
 #include "token.hpp"
 #include <string_view>
 #include <cctype>
-#include <string> // `std::stoull`
+#include <string>
+#include <deque>
 #include <cassert>
 
 [[nodiscard]] inline auto tokenize(std::string_view src) noexcept -> std::vector<token> {
+    static std::deque<std::string> strings;
     std::vector<token> result;
     for (auto i = 0zu; i < src.length();) {
         if      (std::isalpha(src[i]) || src[i] == '_') {
@@ -63,7 +65,33 @@
             }
         }
         else if (src[i] == '"') {
-            assert(false); // TODO
+            std::string str;
+            i++;
+            for (; i < src.length() && !(src[i] == '"' && src[i - 1] != '\\'); i++) {
+                if (src[i - 1] == '\\') {
+                    switch (src[i]) {
+                    case '0':
+                        str.push_back('\0');
+                        break;
+                    case 't':
+                        str.push_back('\t');
+                        break;
+                    case 'n':
+                        str.push_back('\n');
+                        break;
+                    case '"':
+                        str.push_back('"');
+                        break;
+                    }
+                }
+                else if (src[i] == '\\');
+                else {
+                    str.push_back(src[i]);
+                }
+            }
+            i++;
+            strings.push_back(str);
+            result.push_back(token{ .type = token::string, .string_ = std::string_view(strings.back()) });
         }
         else {
             auto const [sym, len] = [src, i]() noexcept {

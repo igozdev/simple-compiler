@@ -1,7 +1,8 @@
 foo ++ - * *= qux 222222
      true<<false != , ::22 ... *-   
-!~-&quux 'a' bar 314159'b'
+!~-&quux 'a' bar 314159'b'  "Foo\"Bar\"Baz\"Qux" 
 'c''d''e' '\0'baz struct
-    '\t'
-    baz2 baz___3330123kfdsf 12345678999                        
+    '\t'"Hello, world!"
+    baz2 ""baz___3330123kfdsf 12345678999                        
 break=
+"Escapes \t\n\"\0"
