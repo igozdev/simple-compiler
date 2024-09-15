@@ -1,0 +1,7 @@
+foo ++ - * *= qux 222222
+     true<<false != , ::22 ... *-   
+!~-&quux 'a' bar 314159'b'
+'c''d''e' '\0'baz struct
+    '\t'
+    baz2 baz___3330123kfdsf 12345678999                        
+break=
